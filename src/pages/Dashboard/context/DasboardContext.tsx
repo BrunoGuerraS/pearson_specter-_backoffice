@@ -1,16 +1,8 @@
 import { createContext, useState } from "react";
 
-type DashboardContextType = {
-    listOfReportsByType: any
-    setListOfReportsByType: any
-}
-const defaultValues: DashboardContextType = {
-    listOfReportsByType: [],
-    setListOfReportsByType: () => {}
 
-}
 
-export const DashboardContext = createContext(defaultValues)
+export const DashboardContext = createContext(null)
 
 const DashboardProvider = ({children}) => {
     const [ listOfReportsByType, setListOfReportsByType ] = useState([])

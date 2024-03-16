@@ -11,12 +11,16 @@ export const getAllReportsByTypeRerportService = async (
   id: string | number
 ) => {
   //debe considerarse paginado por fechas
-  return await api.get(`/type-report/${id}`, { withCredentials: true });
+  return await api.get(`/typeReports/${id}`, { withCredentials: true });
 };
 
 interface updateRerportService {
   id: string | number;
   data: UpdateReportInterface;
+}
+
+export const getReportByIdService = async (id: string | number) => {
+  return await api.get(`/reports/${id}`, { withCredentials: true });
 }
 
 export const updateRerportService = async ({

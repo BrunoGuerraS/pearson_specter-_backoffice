@@ -17,12 +17,12 @@ export const useAuth = (): useAuthInterface => {
 
   const login = async (data: LoginDataInterface): Promise<void> => {
     try {
-      const serviceResponse = await loginService(data);
-      Object.keys(serviceResponse.data).forEach((key) => {
-        ls.setItem(key, serviceResponse.data[key]);
-      });
+      const res = await loginService(data);
+      console.log("res.data", res.data);
+      userDispatch({ type: "createUser", payload: res.data });
+      ls.setItem("user", JSON.stringify(res.data));
+      ls.setItem("token", res.data.token);
       ls.setItem("isLogged", today);
-      console.log('token', ls.getItem('token'));
     } catch (error) {
       console.error("Failed to login:", error);
     }
@@ -40,6 +40,8 @@ export const useAuth = (): useAuthInterface => {
     try {
       await logoutService();
       ls.removeItem("isLogged");
+      ls.removeItem("token");
+      ls.removeItem("user");
       userDispatch({
         type: "resetUser",
       });

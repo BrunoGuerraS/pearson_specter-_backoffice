@@ -1,4 +1,4 @@
-import { FC, createContext, useReducer, useState } from "react";
+import { FC, createContext, useReducer } from "react";
 import { UserInterface } from "../types/users.types";
 
 export interface ActionUserInterface {
@@ -40,7 +40,6 @@ interface AuthProviderProps {
 }
 export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const [tokenChanged, setTokenChanged] = useState(false);
-  const value: any = { userState: state, userDispatch: dispatch, tokenChanged, setTokenChanged };
+  const value: AuthContextType = { userState: state, userDispatch: dispatch };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
